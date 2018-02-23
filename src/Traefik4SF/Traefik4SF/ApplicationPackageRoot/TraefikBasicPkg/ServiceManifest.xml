@@ -8,7 +8,7 @@
     <!-- Nom de votre ServiceType. 
          L'attribut UseImplicitHost indique qu'il s'agit d'un service exécutable invité. -->
     <StatelessServiceType ServiceTypeName="TraefikBasicType" UseImplicitHost="true">
-      <PlacementConstraints>(NodeType == front)</PlacementConstraints>
+      <!--<PlacementConstraints>(NodeType == front)</PlacementConstraints>-->
     </StatelessServiceType>
   </ServiceTypes>
 
@@ -25,8 +25,8 @@
     -->
     <EntryPoint>
       <ExeHost>
-        <Program>traefik_windows-am64.exe</Program>
-        <Arguments>-c trafik.sf.toml</Arguments>
+        <Program>traefik_windows-amd64.exe</Program>
+        <Arguments>-c traefik.sf.toml</Arguments>
         <WorkingFolder>CodeBase</WorkingFolder>
         <!-- Supprimez les marques de commentaire pour journaliser la sortie de console (stdout et stderr) dans l'un des
              répertoires de travail du service. -->
