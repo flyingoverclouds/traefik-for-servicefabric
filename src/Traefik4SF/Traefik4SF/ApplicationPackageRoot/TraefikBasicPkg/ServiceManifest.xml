@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceManifest Name="TraefikBasicPkg"
+                 Version="1.0.0"
+                 xmlns="http://schemas.microsoft.com/2011/01/fabric"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ServiceTypes>
+    <!-- Nom de votre ServiceType. 
+         L'attribut UseImplicitHost indique qu'il s'agit d'un service exécutable invité. -->
+    <StatelessServiceType ServiceTypeName="TraefikBasicType" UseImplicitHost="true">
+      <PlacementConstraints>(NodeType == front)</PlacementConstraints>
+    </StatelessServiceType>
+  </ServiceTypes>
+
+  <!-- Le package de code est votre exécutable de service. -->
+  <CodePackage Name="Code" Version="1.0.0">
+    <!-- SetupEntryPoint est un élément optionnel utilisé pour spécifier un
+         programme à exécuter avant le lancement du code du service. -->
+    <!--
+    <SetupEntryPoint>
+      <ExeHost>
+        <Program></Program>
+      </ExeHost>
+    </SetupEntryPoint>
+    -->
+    <EntryPoint>
+      <ExeHost>
+        <Program>traefik_windows-am64.exe</Program>
+        <Arguments>-c trafik.sf.toml</Arguments>
+        <WorkingFolder>CodeBase</WorkingFolder>
+        <!-- Supprimez les marques de commentaire pour journaliser la sortie de console (stdout et stderr) dans l'un des
+             répertoires de travail du service. -->
+         <ConsoleRedirection FileRetentionCount="5" FileMaxSizeInKb="2048"/> 
+      </ExeHost>
+    </EntryPoint>
+  </CodePackage>
+
+  <!-- Le package de configuration est le contenu du répertoire Config sous PackageRoot qui comprend 
+       un ensemble avec version pouvant être mis à jour indépendamment des paramètres de configuration personnalisés de votre service. -->
+  <ConfigPackage Name="Config" Version="1.0.0" />
+
+  <Resources>
+    <Endpoints>
+      <!-- Ce point de terminaison est utilisé par l'écouteur de communications pour obtenir le port à 
+           écouter. Notez que si votre service est partitionné, ce port est partagé avec 
+           les réplicas des différentes partitions placées dans votre code. -->
+      <Endpoint Name="TraefikDashboardEndpoint" Protocol="tcp" Type="Input"  Port="8088"/>
+      <Endpoint Name="TraefikHttpEndpoint" Protocol="tcp" Type="Input"  Port="80"/>
+      <Endpoint Name="TraefikHttpsEndpoint" Protocol="tcp" Type="Input" Port="443"/>
+    </Endpoints>
+  </Resources>
+</ServiceManifest>
