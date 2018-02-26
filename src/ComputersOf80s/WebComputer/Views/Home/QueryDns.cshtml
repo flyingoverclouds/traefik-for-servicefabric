@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "DNS";
+}
+<p>This page should the result of DNS query using the <b>ServiceFabric DNS service</b> available in the current cluster</p>
+<br/>
+<h2>Querying dns for '@ViewData["fqdn"]' : </h2>
+<br/>
+<pre>
+    @ViewData["DnsResult"]
+</pre>
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Fabric;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebComputer.Models;
@@ -31,11 +32,27 @@ namespace WebComputer.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Sample application for ServiceFabric.<br/>";
 
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> QueryDns(string fqdn)
+        {
+            ViewData["fqdn"] = fqdn;
+
+            StringBuilder sbDnsResult=new StringBuilder();
+            sbDnsResult.Append("Ip returned by the dns services : \r\n");
+            var adresses = await System.Net.Dns.GetHostAddressesAsync(fqdn);
+            foreach(var adr in adresses)
+            {
+                sbDnsResult.Append($"IP: {adr.ToString()}\r\n");
+            }
+
+            ViewData["DnsResult"] = sbDnsResult.ToString() ;
+            return View();
+        }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

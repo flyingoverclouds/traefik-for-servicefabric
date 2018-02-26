@@ -31,7 +31,7 @@
       <!-- Ce point de terminaison est utilisé par l'écouteur de communications pour obtenir le port à 
            écouter. Notez que si votre service est partitionné, ce port est partagé avec 
            les réplicas des différentes partitions placées dans votre code. -->
-      <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" />
+      <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" Port="8080"/>
     </Endpoints>
   </Resources>
 </ServiceManifest>
