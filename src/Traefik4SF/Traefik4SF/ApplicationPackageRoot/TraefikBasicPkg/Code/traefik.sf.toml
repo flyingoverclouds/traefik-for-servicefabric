@@ -30,53 +30,7 @@
 # Default:
 [entryPoints]
     [entryPoints.http]
-    address = ":80"
-
-
-# Traefik logs
-# Enabled by default and log to stdout
-#
-# Optional
-#
-# [traefikLog]
-
-# Sets the filepath for the traefik log. If not specified, stdout will be used.
-# Intermediate directories are created if necessary.
-#
-# Optional
-# Default: os.Stdout
-#
-# filePath = "log/traefik.log"
-
-# Format is either "json" or "common".
-#
-# Optional
-# Default: "common"
-#
-# format = "common"
-
-# Enable access logs
-# By default it will write to stdout and produce logs in the textual
-# Common Log Format (CLF), extended with additional fields.
-#
-# Optional
-#
-# [accessLog]
-
-# Sets the file path for the access log. If not specified, stdout will be used.
-# Intermediate directories are created if necessary.
-#
-# Optional
-# Default: os.Stdout
-#
-# filePath = "/path/to/log/log.txt"
-
-# Format is either "json" or "common".
-#
-# Optional
-# Default: "common"
-#
-# format = "common"
+    address = ":8080"
 
 ################################################################
 # Web configuration backend
@@ -87,30 +41,32 @@
 address = ":8088"
 
 ################################################################
-# Docker configuration backend
+# ServiceFabric configuration backend
 ################################################################
 
-# Enable Docker configuration backend
-#[docker]
 
-# Docker server endpoint. Can be a tcp or a unix socket endpoint.
-#
-# Required
-# Default: "unix:///var/run/docker.sock"
-#
-# endpoint = "tcp://10.10.10.10:2375"
+################################################################
+# Service Fabric provider
+################################################################
 
-# Default domain used.
-# Can be overridden by setting the "traefik.domain" label on a container.
+# Enable Service Fabric configuration backend
+[serviceFabric]
+
+# Service Fabric Management Endpoint
+clusterManagementUrl = "http://localhost:19080"
+
+# Service Fabric Management Endpoint API Version
+apiVersion = "3.0"
+
+# Service Fabric Polling Interval (in seconds)
+refreshSeconds = 5
+
+# Enable TLS connection.
 #
 # Optional
-# Default: ""
 #
-# domain = "docker.localhost"
-
-# Expose containers by default in traefik
-#
-# Optional
-# Default: true
-#
-# exposedbydefault = true
+# [serviceFabric.tls]
+#   ca = "/etc/ssl/ca.crt"
+#   cert = "/etc/ssl/servicefabric.crt"
+#   key = "/etc/ssl/servicefabric.key"
+#   insecureskipverify = true

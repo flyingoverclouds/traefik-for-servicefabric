@@ -8,8 +8,8 @@
     <!-- Nom de votre ServiceType. 
          Ce nom doit correspondre à la chaîne utilisée dans l'appel de RegisterServiceType dans Program.cs. -->
     <StatelessServiceType ServiceTypeName="WebComputerType">
-      <PlacementConstraints>(NodeType == back)</PlacementConstraints>
-    </StatelessServiceType>
+
+   </StatelessServiceType>
   </ServiceTypes>
 
   <!-- Le package de code est votre exécutable de service. -->
@@ -31,7 +31,7 @@
       <!-- Ce point de terminaison est utilisé par l'écouteur de communications pour obtenir le port à 
            écouter. Notez que si votre service est partitionné, ce port est partagé avec 
            les réplicas des différentes partitions placées dans votre code. -->
-      <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" Port="8080"/>
+      <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" />
     </Endpoints>
   </Resources>
 </ServiceManifest>

@@ -37,22 +37,23 @@ namespace WebComputer.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> QueryDns(string fqdn)
-        {
-            ViewData["fqdn"] = fqdn;
 
-            StringBuilder sbDnsResult=new StringBuilder();
+        public async Task<IActionResult> QueryDns(string id)
+        {
+            ViewData["fqdn"] = id;
+
+            StringBuilder sbDnsResult = new StringBuilder();
             sbDnsResult.Append("Ip returned by the dns services : \r\n");
-            var adresses = await System.Net.Dns.GetHostAddressesAsync(fqdn);
-            foreach(var adr in adresses)
+            var adresses = await System.Net.Dns.GetHostAddressesAsync(id);
+            foreach (var adr in adresses)
             {
-                sbDnsResult.Append($"IP: {adr.ToString()}\r\n");
+                sbDnsResult.Append($"        IP: {adr.ToString()}\r\n");
             }
 
-            ViewData["DnsResult"] = sbDnsResult.ToString() ;
+            ViewData["DnsResult"] = sbDnsResult.ToString();
             return View();
         }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

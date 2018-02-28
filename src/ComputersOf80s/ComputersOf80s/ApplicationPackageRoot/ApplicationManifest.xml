@@ -16,7 +16,7 @@
          module ServiceFabric PowerShell.
          
          L'attribut ServiceTypeName ci-dessous doit correspondre au nom défini dans le fichier ServiceManifest.xml importé. -->
-    <!--<Service Name="8bits" ServicePackageActivationMode="ExclusiveProcess">
+    <!--<Service Name="WebComputerType" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="WebComputerType">
         <SingletonPartition />
       </StatelessService>
