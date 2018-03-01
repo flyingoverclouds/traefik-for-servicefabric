@@ -1,8 +1,7 @@
 #!/bin/bash
 fullsvcName=$1
-propertyValue=$2
-
 propertyName="traefik.expose"
+propertyValue=$2
 
 echo SET: $fullsvcName : $propertyName = $propertyValue
 
