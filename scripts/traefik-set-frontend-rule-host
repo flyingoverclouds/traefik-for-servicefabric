@@ -1,0 +1,11 @@
+#!/bin/bash
+fullsvcName=$1
+ruleName=$2
+propertyValue=$3
+
+propertyName="traefik.frontend.rule."$ruleName
+
+echo "SET:  "$fullsvcName ":" $propertyName "="  $propertyValue
+
+curl -X PUT 'http://localhost:19080/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' \
+   -d '{ "PropertyName": "'$propertyName'" , "Value": { "Kind": "String", "Data": "Host: '$propertyValue'" }, "CustomTypeId": "LabelType" }'
