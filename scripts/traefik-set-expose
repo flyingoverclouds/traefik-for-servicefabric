@@ -1,0 +1,11 @@
+#!/bin/bash
+fullsvcName=$1
+propertyValue=$2
+
+propertyName="traefik.expose"
+
+echo SET: $fullsvcName : $propertyName = $propertyValue
+
+curl -X PUT 'http://localhost:19080/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' \
+  -d '{ "PropertyName": "'$propertyName'" , "Value": { "Kind": "String", "Data": "'$propertyValue'" }, "CustomTypeId": "LabelType" }'
+

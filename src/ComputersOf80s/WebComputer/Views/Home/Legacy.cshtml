@@ -3,11 +3,14 @@
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
--<br />
+<br />
  <ul>
+     <li>Request HostHeader = <b>@ViewData["HostHeader"]</b></li>
      <li>Node Name = <b>@ViewData["NodeName"]</b> </li>
      <li>App instance name = <b>@ViewData["AppInstanceName"]</b></li>
      <li>Service Instance name = <b>@ViewData["ServiceInstanceName"]</b></li>
  </ul>
 -<br />
 <p>You love legacy computer ?? visit <a href="http://www.livingcomputers.org/">Living Computers</a></p>
+-<br/>
+<p>sf cluster DNS query : @Html.ActionLink("dns lookup on www.microsoft.com","QueryDns","Home") 

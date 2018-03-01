@@ -21,7 +21,7 @@ namespace WebComputer.Controllers
         public IActionResult Index()
         {
             ViewData["Message"] = $"You are connected on a application of type : {this._svcContext.CodePackageActivationContext.ApplicationTypeName}";
-
+            ViewData["HostHeader"] = this.Request.Host.Value;
             ViewData["NodeName"] = this._svcContext.NodeContext.NodeName;
             ViewData["AppInstanceName"] = this._svcContext.ServiceName.Segments[1];
             ViewData["ServiceInstanceName"] = this._svcContext.ServiceName.Segments[2];
