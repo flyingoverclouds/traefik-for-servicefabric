@@ -42,11 +42,14 @@ defaultEntryPoints = ["http", "https"]
 # Let's encrypt
 ################################################################
 [acme]
+#comment 'caServer' to use production environment
+caServer = "https://acme-staging.api.letsencrypt.org/directory"
 email = "niclerc@outlook.com"
 storageFile = "acme.json"
 onDemand = false
 onHostRule = true
 entryPoint = "https"
+
 [acme.httpChallenge]
   entryPoint = "http"
 

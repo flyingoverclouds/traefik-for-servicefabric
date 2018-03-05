@@ -6,12 +6,15 @@
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Parameters>
     <Parameter Name="TraefikBasic_InstanceCount" DefaultValue="1" />
+    <Parameter Name="TraefikBasic_DashboardPort" DefaultValue="8088"/>
+    <Parameter Name="TraefikBasic_HttpPort" DefaultValue="8080"/>
+    <Parameter Name="TraefikBasic_HttpsPort" DefaultValue="8443"/>
   </Parameters>
   <!-- Importez ServiceManifest à partir de ServicePackage. ServiceManifestName et ServiceManifestVersion 
        doivent correspondre aux attributs Name et Version de l'élément ServiceManifest défini dans le 
        fichier ServiceManifest.xml. -->
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="TraefikBasicPkg" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="TraefikBasicPkg" ServiceManifestVersion="1.0.0"/>
     <ConfigOverrides />
   </ServiceManifestImport>
   <DefaultServices>
@@ -20,10 +23,10 @@
          module ServiceFabric PowerShell.
          
          L'attribut ServiceTypeName ci-dessous doit correspondre au nom défini dans le fichier ServiceManifest.xml importé. -->
-    <Service Name="TraefikBasic" ServicePackageActivationMode="ExclusiveProcess">
+    <!--<Service Name="TraefikBasic" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="TraefikBasicType" InstanceCount="[TraefikBasic_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
-    </Service>
+    </Service>-->
   </DefaultServices>
 </ApplicationManifest>

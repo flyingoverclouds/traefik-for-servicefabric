@@ -44,9 +44,10 @@
       <!-- Ce point de terminaison est utilisé par l'écouteur de communications pour obtenir le port à 
            écouter. Notez que si votre service est partitionné, ce port est partagé avec 
            les réplicas des différentes partitions placées dans votre code. -->
+
       <Endpoint Name="TraefikDashboardEndpoint" Protocol="tcp" Type="Input"  Port="8088"/>
-      <Endpoint Name="TraefikHttpEndpoint" Protocol="tcp" Type="Input"  Port="8080"/>
-      <Endpoint Name="TraefikHttpsEndpoint" Protocol="tcp" Type="Input" Port="8443"/>
+      <Endpoint Name="TraefikHttpEndpoint" Protocol="tcp" Type="Input"  Port="80"/>
+      <Endpoint Name="TraefikHttpsEndpoint" Protocol="tcp" Type="Input" Port="443"/>
     </Endpoints>
   </Resources>
 </ServiceManifest>

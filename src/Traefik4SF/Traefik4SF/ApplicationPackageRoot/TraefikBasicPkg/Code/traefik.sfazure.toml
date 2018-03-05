@@ -29,25 +29,27 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default:
 [entryPoints]
-    [entryPoints.http]
-    address = ":8080"
-
-	[entryPoints.https]
-	address = ":8443"
-		[entrypoints.https.tls]
-
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
 
 
 ################################################################
 # Let's encrypt
 ################################################################
 [acme]
+acmeLogging = true
+#comment 'caServer' to use production environment
+caServer = "https://acme-staging.api.letsencrypt.org/directory"
 email = "niclerc@outlook.com"
-storageFile = "acme.json"
+storage = "acme.json"
 onDemand = false
 onHostRule = true
 entryPoint = "https"
-[acme.httpChallenge]
+
+  [acme.httpChallenge]
   entryPoint = "http"
 
 
@@ -69,7 +71,7 @@ address = ":8088"
 clusterManagementUrl = "https://spikepoclc.francecentral.cloudapp.azure.com:19080"
 apiVersion = "3.0"
 refreshSeconds = 5
-[serviceFabric.tls]
+  [serviceFabric.tls]
   ca = "redksfdev.crt"
   cert = "spikepoclc.crt"
   key = "spikepoclc.key"
