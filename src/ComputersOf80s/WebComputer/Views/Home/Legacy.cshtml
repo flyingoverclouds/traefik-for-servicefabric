@@ -4,12 +4,14 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 <br />
- <ul>
-     <li>Request HostHeader = <b>@ViewData["HostHeader"]</b></li>
-     <li>Node Name = <b>@ViewData["NodeName"]</b> </li>
-     <li>App instance name = <b>@ViewData["AppInstanceName"]</b></li>
-     <li>Service Instance name = <b>@ViewData["ServiceInstanceName"]</b></li>
- </ul>
+<ul>
+    <li>Request HostHeader = <b>@ViewData["HostHeader"]</b></li>
+    <li>Node Name = <b>@ViewData["NodeName"]</b> </li>
+    <li>App instance name = <b>@ViewData["AppInstanceName"]</b></li>
+    <li>Service Instance name = <b>@ViewData["ServiceInstanceName"]</b></li>
+    <li>&nbsp;</li>
+    <li>Local time on vm @System.Environment.MachineName is : @DateTime.Now.ToString()</li>
+</ul>
 -<br />
 <p>You love legacy computer ?? visit <a href="http://www.livingcomputers.org/">Living Computers</a></p>
 -<br/>

@@ -1,0 +1,8 @@
+#!/bin/bash
+fullsvcName=$1
+propertyName=$2
+
+echo "GET:  "$fullsvcName ":" $propertyName 
+
+curl -X GET 'http://localhost:19080/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&PropertyName='$propertyName
+

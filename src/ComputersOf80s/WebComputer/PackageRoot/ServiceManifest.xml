@@ -8,8 +8,8 @@
     <!-- Nom de votre ServiceType. 
          Ce nom doit correspondre à la chaîne utilisée dans l'appel de RegisterServiceType dans Program.cs. -->
     <StatelessServiceType ServiceTypeName="WebComputerType">
-
-   </StatelessServiceType>
+      
+    </StatelessServiceType>
   </ServiceTypes>
 
   <!-- Le package de code est votre exécutable de service. -->
