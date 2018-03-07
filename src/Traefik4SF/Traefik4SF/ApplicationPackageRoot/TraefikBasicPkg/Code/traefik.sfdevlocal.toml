@@ -22,7 +22,7 @@
 # Optional
 # Default: ["http"]
 #
-defaultEntryPoints = ["http", "https"]
+#defaultEntryPoints = ["http", "https"]
 
 # Entrypoints definition
 #
@@ -32,26 +32,26 @@ defaultEntryPoints = ["http", "https"]
     [entryPoints.http]
     address = ":8080"
 
-	[entryPoints.https]
-	address = ":8443"
-		[entrypoints.https.tls]
+#	[entryPoints.https]
+#	address = ":8443"
+#		[entrypoints.https.tls]
 
 
 
 ################################################################
 # Let's encrypt
 ################################################################
-[acme]
+#[acme]
 #comment 'caServer' to use production environment
-caServer = "https://acme-staging.api.letsencrypt.org/directory"
-email = "niclerc@outlook.com"
-storageFile = "acme.json"
-onDemand = false
-onHostRule = true
-entryPoint = "https"
+#caServer = "https://acme-staging.api.letsencrypt.org/directory"
+#email = "niclerc@outlook.com"
+#storageFile = "acme.json"
+#onDemand = false
+#onHostRule = true
+#entryPoint = "https"
 
-[acme.httpChallenge]
-  entryPoint = "http"
+#[acme.httpChallenge]
+#  entryPoint = "http"
 
 
 ################################################################

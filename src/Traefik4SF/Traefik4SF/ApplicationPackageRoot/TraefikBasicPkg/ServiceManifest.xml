@@ -26,7 +26,9 @@
     <EntryPoint>
       <ExeHost>
         <Program>traefik_windows-amd64.exe</Program>
-        <Arguments>-c traefik.sfazure.toml</Arguments>
+        
+        <!-- change the config file for local deploy // TODO : use parameters to select local/azure config file -->
+        <Arguments>-c traefik.sfdevlocal.toml</Arguments>
         <WorkingFolder>CodeBase</WorkingFolder>
         <!-- Supprimez les marques de commentaire pour journaliser la sortie de console (stdout et stderr) dans l'un des
              répertoires de travail du service. -->

@@ -38,6 +38,9 @@
     <Content Include="ApplicationPackageRoot\TraefikBasicPkg\Code\spikepoclc.key">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ApplicationPackageRoot\TraefikBasicPkg\Code\_ADD_CERT_AND_KEY_HERE_.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ApplicationPackageRoot\TraefikBasicPkg\Code\traefik.sfdevlocal.toml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

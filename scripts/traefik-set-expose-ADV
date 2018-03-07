@@ -1,12 +1,12 @@
 #!/bin/bash
-# --cert FILE.pem|-c  --endpoint|-e "http://clusterurl.:19080" "appname/svcname" true|false
+# --insecure|-k --cert|-c FILE.pem  --endpoint|-e "http://clusterurl.:19080" "appname/svcname" true|false
 fullsvcName=""
 propertyValue=""
 propertyName="traefik.expose"
 sfAuthCertPem=""
 curlCertOption=""
+curlCertInsecureOption=""
 sfEndpointUrl='http://localhost:19080/'
-
 
 # parameter checking/analysing
 POSITIONAL=()
@@ -17,7 +17,7 @@ key="$1"
 case $key in
     -c|--cert)
     sfAuthCertPem="$2"
-    curlCertOption=" --cert ${sfAuthCertPem}"
+    curlCertOption=" --cert ${sfAuthCertPem} "
     shift # past argument
     shift # past value
     ;;
@@ -25,6 +25,10 @@ case $key in
     sfEndpointUrl="$2"
     shift # past argument
     shift # past value
+    ;;
+    -k|--insecure)
+    curlCertInsecureOption=" --insecure "
+    shift # past argument
     ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
@@ -34,18 +38,18 @@ esac
 done
 fullsvcName="${POSITIONAL[0]}"
 propertyValue="${POSITIONAL[1]}"
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+
 echo ENDPOINT  = "${sfEndpointUrl}"
 echo CERT_PEM  = "${sfAuthCertPem}"
 echo CURL_CERT = "${curlCertOption}"
+echo CURL INSEC= "${curlCertInsecureOption}"
 echo SERVICE   = "${fullsvcName}"
 echo PROPERTY  = "${propertyName}"
 echo VALUE     = "${propertyValue}"
 
-
-set -- "${POSITIONAL[@]}" # restore positional parameters
-
-exit
-#echo SET: $fullsvcName : $propertyName = $propertyValue
-# curl -X PUT $endpointUrm$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' \
-#  -d '{ "PropertyName": "'$propertyName'" , "Value": { "Kind": "String", "Data": "'$propertyValue'" }, "CustomTypeId": "LabelType" }'
+echo SET: $fullsvcName : $propertyName = $propertyValue
+curl -X PUT $sfEndpointUrl'/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' $curlCertOption $curlCertInsecureOption \
+  -d '{ "PropertyName": "'$propertyName'" , "Value": { "Kind": "String", "Data": "'$propertyValue'" }, "CustomTypeId": "LabelType" }'
 
