@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# (hard) WORK IN PROGRESS !!! 
+
+propertyName="traefik.expose"
+sfEndpointUrl='http://localhost:19080/'
+function echoHelp {
+  echo 'Set property '$propertyName' in Naming service for a ServiceFabric service'
+  echo 'Usage : '$0' appname/servicename --label1 property1value'
+  echo '  required:'
+  echo '     appname/servicename    : the identifier of your service (from fabric://appname/servicename)'
+  echo '     --[property1] property1value :  specified the value to set on the property'
+  echo '  properties :'
+  echo '      --expose true|false : true: Traefik exposes the services; false : service is not exposed'
+  echo '      --passHostHeader trye|false : true: external header is forwarded; false: internal header is used '
+  echo '      --entryPoint "entryPointsList" : list of entry points used to expose the service (ex: "http,https")'
+  echo '      --host "hostnames" : define the public hostname for the service (ex: "cpc464.kangooroo.red,amstrad.kangooroo.red")'
+  echo '      --path "pathPrefix" : define the path prefix for the service (ex : "/legacy/amstrad/cpc464")'
+  echo '      --lbMethod wrr|drr : set the load balancing method for the service'
+  echo '      --weight 1 : define the weight of the service'
+  echo '      --lbStickiness true|false : set the session stickiness'
+  echo '      --lbStickinessCookie "cookiename" : define the lbSession cookie name'
+  echo '  optionnal:'
+  echo '     -c|--cert     : certificat file used to authenticate (PEM format) (default: no cert).'
+  echo '     -k|--insecure : allow usage of self-signed cerificat (remove CA chain checks) (default: enforce certificate checks)'
+  echo '     -e|--endpoint : ServiceFabric REST api url (default: '$sfEndpointUrl')'
+  echo '     -h|--help     : print this help'
+}
+fullsvcName=""
+propertyValue=""
+sfAuthCertPem=""
+curlCertOption=""
+curlCertInsecureOption=""
+
+
+
+# parameter checking/analysing
+POSITIONAL=()
+while [[ $# -gt 0 ]] 
+do
+  key="$1"
+  case $key in
+      --expose)
+      runExpose=true;
+      exposeValue="$2"
+      shift # past property name
+      shift # past value
+      ;;
+      -h|--help)
+      echoHelp
+      exit
+      ;;
+      -c|--cert)
+      sfAuthCertPem="$2"
+      curlCertOption=" --cert ${sfAuthCertPem} "
+      shift # past argument
+      shift # past value
+      ;;
+      -e|--endpoint)
+      sfEndpointUrl="$2"
+      shift # past argument
+      shift # past value
+      ;;
+      -k|--insecure)
+      curlCertInsecureOption=" --insecure "
+      shift # past argument
+      ;;
+      *)    # unknown option
+      POSITIONAL+=("$1") # save it in an array for later
+      shift # past argument
+      ;;
+  esac
+done
+fullsvcName="${POSITIONAL[0]}"
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+
+function setProperty {
+  echo 'setting '$1' = '$2
+  curl -X PUT $sfEndpointUrl'/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' $curlCertOption $curlCertInsecureOption \
+    -d '{ "PropertyName": "'$1'" , "Value": { "Kind": "String", "Data": "'$2'" }, "CustomTypeId": "LabelType" }'
+}
+
+echo 'ServiceFabric endpoint = '$sfEndpointUrl
+if [$runExpose]; then
+  echo "RUN EXPOSE"
+fi
+
+
