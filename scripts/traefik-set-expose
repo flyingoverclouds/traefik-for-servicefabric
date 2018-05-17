@@ -52,10 +52,3 @@ echo SET: $fullsvcName : $propertyName = $propertyValue
 curl -X PUT $sfEndpointUrl'/Names/'$fullsvcName'/$/GetProperty?api-version=6.0&IncludeValues=true' $curlCertOption $curlCertInsecureOption \
   -d '{ "PropertyName": "'$propertyName'" , "Value": { "Kind": "String", "Data": "'$propertyValue'" }, "CustomTypeId": "LabelType" }'
 exit
-
-#HELP 
-:help
-echo 'Set traefik.expose property on a ServiceFabric service'
-echo 'Usage : $0 "appname/servicename" true|false'
-echo '  mandatory:'
-echo '     - "appname/servicename" : the identifier of your service (from fabric://appname/servicename)''
